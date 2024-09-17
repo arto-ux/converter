@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyslexia-Friendly Text Converter | Improve Reading & Accessibility</title>
+    <meta name="description" content="Boost reading comprehension with our dyslexia-friendly text converter. Break text into syllables for easier reading and accessibility. Ideal for children and adults with dyslexia or reading difficulties. Try it now and make reading simpler!">
+
+    <!-- Load Lexend font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+              font-size: 16px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+    
+        body {
+            width: 100%;
+            min-height: 100vh;
+            font-size: 16px;
+            line-height: 1.5;
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased; /* Smoothens the font rendering */
+            -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
+            text-rendering: optimizeLegibility; /* Prioritizes legibility */
+            font-optical-sizing: auto;
+            font-style: normal;
+            background-color: #FAFAFA;
+            color: #64748B;
+            padding: 80px 80px 128px;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        h1 {
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-weight: 800;
+            font-size: 32px;
+            color: #0A0A0A;
+            line-height: 1.125;
+            margin-top: 64px;
+            margin-bottom: 32px;
+        }
+        
+        h2 {
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 1.25;
+            margin-top: 40px;
+            margin-bottom: 24px;
+        }
+        
+        p {
+            margin-top: 0;
+        }
+        
+        a {
+            color: #0051FF;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        textarea {
+            width: 100%;
+            height: 280px;
+            padding: 24px 28px;
+            border: 1px solid #D4D4D4;
+            background-color: #fff;
+            margin-bottom: 16px;
+            border-radius: 28px;
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 400;
+            overflow: hidden;
+            outline-style: none;
+            resize: none;
+            scrollbar-width: none;
+        }
+
+        textarea::-webkit-scrollbar {
+            display: none; /* Hide the scrollbar for WebKit browsers (Chrome, Safari, etc.) */
+        }
+        
+        .btn-group {
+         display: flex;
+         gap: 16px;
+         margin-bottom: 56px;
+         text-align: center;
+        }
+
+        #convert-btn {
+            display: block;
+            height: 56px;
+            width: 180px;
+            padding: 15px 28px 17px;
+            background-color: #0A0A0A;
+            color: white;
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 1.2;
+            letter-spacing: .3px;
+            border: none;
+            cursor: pointer;
+            border-radius: 28px;
+            z-index: 2;
+            transition: all 1s ease;
+        }
+
+        #convert-btn:hover {
+            background-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #00f5d4);
+            background-size: 300%;
+            animation: magic-gradient 2s ease infinite;
+        }
+        
+        @keyframes magic-gradient {
+            0% {background-position: 0% 0%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        
+        #donate-btn {
+            display: inline-block;
+            height: 44px;
+            padding: 9px 24px 11px 12px;
+            background-color: transparent;
+            color: #0A0A0A;
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.25;
+            letter-spacing: .3px;
+            border: 2px solid #E5E5E5;
+            cursor: pointer;
+            border-radius: 28px;
+            margin-top: 8px;
+            z-index: 2;
+            text-decoration: none;
+            transition: all .4s ease;
+        }
+
+        #donate-btn:hover {
+            background-color: #0A0A0A;
+            color: white;
+            border: 2px solid #0A0A0A;
+            text-decoration: none;
+        }
+
+        #output-text {
+            font-size: 1.5em;
+            font-weight: 600;
+            border: none;
+            font-family: "Plus Jakarta Sans", system-ui;
+            line-height: 1.8;
+            color: #0A0A0A;
+            min-height: 160px;
+            margin-bottom: 48px;
+        }
+
+        .syllable {
+            background-color: #BBF7D0;
+            padding: 0 2px;
+            border-radius: 8px;
+        }
+
+        .controls {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 16px;
+            text-align: center;
+        }
+
+        .controls button {
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 16px;
+            padding: 8px;
+            background-color: transparent;
+            color: #A3A3A3;
+            cursor: pointer;
+            margin: 4px 0;
+            transition: all .4s ease;
+        }
+
+        .controls button:hover {
+            background-color: #0A0A0A;
+            color: white;
+        }
+
+        /* Scroll to Top Button */
+        #scroll-top-btn {
+            position: fixed;
+            bottom: 48px;
+            right: 16px;
+            width: 48px;
+            height: 48px;
+            background-color: #E5E5E5;
+            color: #525252;
+            border: none;
+            border-radius: 50%;
+            padding: 12px;
+            cursor: pointer;
+            transition: all .4s ease;
+        }
+
+        #scroll-top-btn:hover {
+            background-color: #0A0A0A;
+            color: white;
+        }
+        
+        .card {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            flex-direction: column;
+            font-size: 14px;
+        }
+        .profile-image {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+        .content {
+            flex: 1;
+        }
+        
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FAFAFA;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        #preloader.hide-loader {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        #preloader .spinner {
+            border: 6px solid #E5E5E5;
+            border-top: 6px solid #0A0A0A;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin .8s ease infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        
+        @media (max-width: 767px) {
+          .controls {display: none;}
+          .btn-group {flex-direction: column;}
+          body {padding: 16px;}
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <h1>Dyslexia-Friendly Text Converter</h1>
+        <textarea id="input-text" placeholder="Paste your text here..."></textarea>
+        <div class="btn-group">
+            <button id="convert-btn">Convert Text</button>
+            <!-- <button id="speak-btn">Read Aloud</button> -->
+        </div>
+        <div id="output-text" class="output-text"></div>
+        <div class="card">
+            <img src="images/arto.jpg" alt="Arto Baghdasaryan" class="profile-image">
+            <div class="content">
+                <p>Hi there, I'm Arto! 👋</p>
+                <p>I created this tool for kids who struggle with reading and are often unfairly judged as lazy or not smart. If you know how to make this tool more useful, reach out to me on 
+                    <a href="https://www.linkedin.com/in/artobaghdasaryan" target="_blank">LinkedIn.</a>
+                </p>
+                <p>And if you'd like to support me in keeping this tool available, donations are welcome and appreciated.</p>
+                <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">😊 Donate!</a>
+            </div>
+        </div>
+    </div>
+    
+        
+    <div class="controls">
+        <button id="increase-font">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" width="32px"  height="32px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>                
+        </button>
+        <button id="decrease-font">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" width="32px"  height="32px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>                 
+        </button>
+    </div>
+
+    <button id="scroll-top-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="24px"  height="24px" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+        </svg>
+    </button>
+
+    <script>
+        // Display preloader on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            const preloader = document.getElementById('preloader');
+    
+            window.onload = function () {
+                // Ensure the loader is visible for at least 1 second
+                setTimeout(function () {
+                    preloader.classList.add('hide-loader');
+                }, 800); // delay
+            };
+        });
+        
+        /* Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+C
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || // F12
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+                (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl+Shift+C
+                (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
+                return false;
+            }
+        }; */
+    
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const inputText = document.getElementById('input-text').value;
+            const formattedText = formatTextForDyslexia(inputText);
+            document.getElementById('output-text').innerHTML = formattedText;
+        });
+        
+        function formatTextForDyslexia(text) {
+            let words = text.split(/\s+/);
+            return words.map(word => splitIntoSyllables(word)).join(' ');
+        }
+        
+        function splitIntoSyllables(word) {
+            const syllableRegex = /[^aeiou]*[aeiou]+(?:[^aeiou]*$|[^aeiou](?=[aeiou]))?/gi;
+            let syllables = word.match(syllableRegex);
+            if (!syllables) return word;
+            return syllables.map(syllable => `<span class="syllable">${syllable}</span>`).join('');
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML = `.syllable { background-color: #BBF7D0; padding: 0 2px; border-radius: 8px; }`;
+        document.head.appendChild(style);
+        
+        /* Text-to-Speech Functionality
+        document.getElementById('speak-btn').addEventListener('click', function() {
+            const textToSpeak = document.getElementById('output-text').textContent;
+            const speech = new SpeechSynthesisUtterance(textToSpeak);
+
+            // Get all available voices and select a high-quality one
+            const voices = window.speechSynthesis.getVoices();
+            const preferredVoice = voices.find(voice => voice.name.includes('Google US English Female')) || 
+                                   voices.find(voice => voice.name.includes('Google US English')) || 
+                                   voices.find(voice => voice.lang === 'en-US') || 
+                                   voices[0];
+
+            speech.voice = preferredVoice;
+            speech.rate = .9;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
+        }); */
+
+        // Controls for font size
+        const outputText = document.getElementById('output-text');
+        let fontSize = 1.5;
+
+        document.getElementById('increase-font').addEventListener('click', function() {
+            fontSize += 0.2;
+            outputText.style.fontSize = fontSize + 'em';
+        });
+
+        document.getElementById('decrease-font').addEventListener('click', function() {
+            fontSize = Math.max(1, fontSize - 0.2);
+            outputText.style.fontSize = fontSize + 'em';
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scroll-top-btn');
+        
+        window.onscroll = function() {
+            // Show the button if scrolled down more than 100px
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        };
+        
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Initially hide the scroll to top button
+        scrollTopBtn.style.display = 'none';
+
+        
+    </script>
+</body>
+</html>
+
