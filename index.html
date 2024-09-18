@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dyslexia-Friendly Text Converter | Improve Reading & Accessibility</title>
     <meta name="description" content="Boost reading comprehension with our dyslexia-friendly text converter. Break text into syllables for easier reading and accessibility. Ideal for children and adults with dyslexia or reading difficulties. Try it now and make reading simpler!">
-
+    
     <link rel="icon" href="fav.svg" type="image/svg+xml">
-    <!-- Load Lexend font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
@@ -83,8 +82,17 @@
             max-width: 800px;
             margin: 0 auto;
         }
+        
+        img, figure {
+            max-width: 100% !important;
+            margin: 0 auto;
+            margin-block-start: 0 !important;
+            margin-block-end: 0 !important;
+            margin-inline-start: 0 !important;
+            margin-inline-end: 0 !important;
+        }
 
-        textarea {
+        .editable-div {
             width: 100%;
             height: 280px;
             padding: 24px 28px;
@@ -96,15 +104,61 @@
             font-size: 16px;
             line-height: 1.5;
             font-weight: 400;
-            overflow: hidden;
+            overflow-y: auto;
             outline-style: none;
-            resize: none;
-            scrollbar-width: none;
+            color: #0A0A0A; /* Set default text color */
+        }
+    
+        .editable-div[placeholder]:empty:before {
+            content: attr(placeholder);
+            color: #888;
+        }
+    
+        /* Reset styles for pasted content */
+        .editable-div * {
+            all: revert;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            color: inherit !important;
+            background: none !important;
+        }
+    
+        /* Preserve list styles */
+        .editable-div ul, .editable-div ol {
+            padding-left: 2em;
+        }
+    
+        .editable-div ul {
+            list-style-type: disc;
+        }
+    
+        .editable-div ol {
+            list-style-type: decimal;
+        }
+    
+        /* Output text styles */
+        #output-text {
+            font-size: 1.5em;
+            font-weight: 600;
+            border: none;
+            font-family: "Plus Jakarta Sans", system-ui;
+            line-height: 1.8;
+            color: #0A0A0A;
+            min-height: 160px;
+            margin-bottom: 48px;
+            white-space: normal;
+        }
+    
+        #output-text * {
+            all: revert;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            color: inherit !important;
+            background: none !important;
         }
 
-        textarea::-webkit-scrollbar {
-            display: none; /* Hide the scrollbar for WebKit browsers (Chrome, Safari, etc.) */
-        }
         
         .btn-group {
          display: flex;
@@ -128,7 +182,6 @@
             border: none;
             cursor: pointer;
             border-radius: 28px;
-            z-index: 2;
             transition: all 1s ease;
         }
 
@@ -144,10 +197,33 @@
             100% {background-position: 0% 50%;}
         }
         
+        #clear-btn {
+            display: inline-block;
+            height: 56px;
+            width: 110px;
+            padding: 15px 28px 17px;
+            background-color: #f0f0f0;
+            color: #0A0A0A;
+            font-family: "Plus Jakarta Sans", system-ui;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 1.2;
+            letter-spacing: .3px;
+            border: none;
+            cursor: pointer;
+            border-radius: 28px;
+            transition: all 0.3s ease;
+        }
+        
+        #clear-btn:hover {
+            background-color: #D4D4D4;
+        }
+        
+        
         #donate-btn {
             display: inline-block;
-            height: 44px;
-            padding: 9px 24px 11px 12px;
+            height: 40px;
+            padding: 8px 24px 10px 24px;
             background-color: transparent;
             color: #0A0A0A;
             font-family: "Plus Jakarta Sans", system-ui;
@@ -155,37 +231,56 @@
             font-size: 16px;
             line-height: 1.25;
             letter-spacing: .3px;
-            border: 2px solid #E5E5E5;
+            border: 1px solid #0A0A0A;
             cursor: pointer;
-            border-radius: 28px;
+            border-radius: 20px;
             margin-top: 8px;
-            z-index: 2;
             text-decoration: none;
             transition: all .4s ease;
         }
 
         #donate-btn:hover {
-            background-color: #0A0A0A;
+            background-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #00f5d4);
             color: white;
-            border: 2px solid #0A0A0A;
+            background-size: 300%;
+            animation: magic-gradient 2s ease infinite;
+            border: 1px solid transparent;
             text-decoration: none;
+        } 
+
+        .editable-div * {
+            all: revert;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            color: inherit !important;
+            background: none !important;
+        }
+        
+        .editable-div::-webkit-scrollbar {
+            display: none; /* Hide the scrollbar for WebKit browsers (Chrome, Safari, etc.) */
         }
 
-        #output-text {
-            font-size: 1.5em;
-            font-weight: 600;
-            border: none;
-            font-family: "Plus Jakarta Sans", system-ui;
-            line-height: 1.8;
-            color: #0A0A0A;
-            min-height: 160px;
-            margin-bottom: 48px;
+        /* Output text styles */
+        #output-text * {
+            all: revert;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            color: inherit !important;
+            background: none !important;
         }
-
-        .syllable {
-            background-color: #BBF7D0;
-            padding: 0 2px;
-            border-radius: 8px;
+    
+        /* Preserved styles for syllables */
+        #output-text .syllable {
+            background-color: hsl(168 45% 87% / 1) !important;
+            padding: 0px .15em .05em;
+            border-radius: .3em;
+        }
+        
+        #output-text .word {
+            display: inline-block;
+            padding: 0 .15em;
         }
 
         .controls {
@@ -253,6 +348,7 @@
         }
         .content {
             flex: 1;
+            margin-top: 20px;
         }
         
         #preloader {
@@ -291,9 +387,18 @@
         }
         
         @media (max-width: 767px) {
+          body {padding: 80px 80px 128px 16px;}
+        }
+        
+        @media (max-width: 539px) {
           .controls {display: none;}
+          body {padding: 80px 16px 128px 16px;}
+        }
+        
+        @media (max-width: 359px) {
           .btn-group {flex-direction: column;}
-          body {padding: 16px;}
+          #convert-btn {width: 100%;}
+          #clear-btn {width: 100%;}
         }
         
     </style>
@@ -305,21 +410,21 @@
 
     <div class="container">
         <h1>Dyslexia-Friendly Text Converter</h1>
-        <textarea id="input-text" placeholder="Paste your text here..."></textarea>
+        <div id="input-text" contenteditable="true" class="editable-div" placeholder="Paste your text here..."></div>
         <div class="btn-group">
             <button id="convert-btn">Convert Text</button>
-            <!-- <button id="speak-btn">Read Aloud</button> -->
+            <button id="clear-btn">Clear</button>
         </div>
-        <div id="output-text" class="output-text"></div>
+        <div id="output-text" class="output-text hyphenate"></div>
         <div class="card">
             <img src="arto.jpg" alt="Arto Baghdasaryan" class="profile-image">
             <div class="content">
-                <p>Hi there, I'm Arto! 👋</p>
+                <p>Hi there, I'm Arto! 👋😊</p>
                 <p>I created this tool for kids who struggle with reading and are often unfairly judged as lazy or not smart. If you know how to make this tool more useful, reach out to me on 
                     <a href="https://www.linkedin.com/in/artobaghdasaryan" target="_blank">LinkedIn.</a>
                 </p>
                 <p>And if you'd like to support me in keeping this tool available, donations are welcome and appreciated.</p>
-                <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">😊 Donate!</a>
+                <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">Donate</a>
             </div>
         </div>
     </div>
@@ -344,7 +449,75 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
         </svg>
     </button>
+    
+    <script src="Hyphenator.js"></script>
+    <script src="en-us.js"></script>
 
+    <script>
+        document.getElementById('convert-btn').addEventListener('click', function () {
+            const inputElement = document.getElementById('input-text');
+            const outputElement = document.getElementById('output-text');
+            
+            // Clone the input content
+            const cleanedContent = inputElement.cloneNode(true);
+            
+            // Remove all style attributes
+            cleanedContent.querySelectorAll('*').forEach(el => {
+                el.removeAttribute('style');
+                el.removeAttribute('class');
+            });
+            
+            // Set the cleaned content to the output element
+            outputElement.innerHTML = cleanedContent.innerHTML;
+        
+            // Run Hyphenator to apply hyphenation
+            Hyphenator.run();
+        
+            // After Hyphenator runs, wait for a short delay and then process the text
+            setTimeout(() => {
+                wrapHyphenatedSyllablesWithStyle(outputElement);
+            }, 100); // Short delay to allow DOM to update
+        });
+        
+        function wrapHyphenatedSyllablesWithStyle(element) {
+            // Process each child node of the element
+            Array.from(element.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    // Process text nodes
+                    let fragment = document.createDocumentFragment();
+                    let words = node.textContent.match(/[\w\u00AD]+[^\w\u00AD\s]*\s*/g) || [];
+        
+                    words.forEach(wordWithSpace => {
+                        let wordMatch = wordWithSpace.match(/([\w\u00AD]+)([^\w\u00AD\s]*)(\s*)/);
+                        let word = wordMatch[1];
+                        let punctuation = wordMatch[2];
+                        let space = wordMatch[3];
+        
+                        let syllables = word.split('\u00AD');
+                        let wordSpan = document.createElement('span');
+                        wordSpan.className = 'word';
+        
+                        syllables.forEach(syllable => {
+                            let syllableSpan = document.createElement('span');
+                            syllableSpan.className = 'syllable';
+                            syllableSpan.textContent = syllable;
+                            wordSpan.appendChild(syllableSpan);
+                        });
+        
+                        wordSpan.innerHTML += punctuation;
+                        fragment.appendChild(wordSpan);
+                        if (space) fragment.appendChild(document.createTextNode(space));
+                    });
+        
+                    node.parentNode.replaceChild(fragment, node);
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    // Recursively process child elements
+                    wrapHyphenatedSyllablesWithStyle(node);
+                }
+            });
+        }
+    </script>
+    
     <script>
         // Display preloader on page load
         document.addEventListener("DOMContentLoaded", function () {
@@ -358,7 +531,7 @@
             };
         });
         
-        // Disable right-click
+        Disable right-click
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
@@ -373,46 +546,6 @@
             }
         };
     
-        document.getElementById('convert-btn').addEventListener('click', function() {
-            const inputText = document.getElementById('input-text').value;
-            const formattedText = formatTextForDyslexia(inputText);
-            document.getElementById('output-text').innerHTML = formattedText;
-        });
-        
-        function formatTextForDyslexia(text) {
-            let words = text.split(/\s+/);
-            return words.map(word => splitIntoSyllables(word)).join(' ');
-        }
-        
-        function splitIntoSyllables(word) {
-            const syllableRegex = /[^aeiou]*[aeiou]+(?:[^aeiou]*$|[^aeiou](?=[aeiou]))?/gi;
-            let syllables = word.match(syllableRegex);
-            if (!syllables) return word;
-            return syllables.map(syllable => `<span class="syllable">${syllable}</span>`).join('');
-        }
-
-        const style = document.createElement('style');
-        style.innerHTML = `.syllable { background-color: #BBF7D0; padding: 0 2px; border-radius: 8px; }`;
-        document.head.appendChild(style);
-        
-        /* Text-to-Speech Functionality
-        document.getElementById('speak-btn').addEventListener('click', function() {
-            const textToSpeak = document.getElementById('output-text').textContent;
-            const speech = new SpeechSynthesisUtterance(textToSpeak);
-
-            // Get all available voices and select a high-quality one
-            const voices = window.speechSynthesis.getVoices();
-            const preferredVoice = voices.find(voice => voice.name.includes('Google US English Female')) || 
-                                   voices.find(voice => voice.name.includes('Google US English')) || 
-                                   voices.find(voice => voice.lang === 'en-US') || 
-                                   voices[0];
-
-            speech.voice = preferredVoice;
-            speech.rate = .9;
-            speech.pitch = 1;
-
-            window.speechSynthesis.speak(speech);
-        }); */
 
         // Controls for font size
         const outputText = document.getElementById('output-text');
@@ -446,6 +579,13 @@
         
         // Initially hide the scroll to top button
         scrollTopBtn.style.display = 'none';
+        
+        // Add this new function for clearing the input
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            const inputElement = document.getElementById('input-text');
+            inputElement.innerHTML = ''; // Clear the content
+            inputElement.focus(); // Optional: Set focus back to the input area
+        });
 
         
     </script>
