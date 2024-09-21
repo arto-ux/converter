@@ -7,7 +7,6 @@
     <meta name="description" content="Boost reading comprehension with our dyslexia-friendly text converter. Break text into syllables for easier reading and accessibility. Ideal for children and adults with dyslexia or reading difficulties. Try it now and make reading simpler!">
     
     <link rel="icon" href="fav.svg" type="image/svg+xml">
-    <!-- Load Lexend font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
@@ -42,7 +41,7 @@
             font-style: normal;
             background-color: #FAFAFA;
             color: #64748B;
-            padding: 80px 80px 128px;
+            padding: 128px 80px 128px;
             margin: 0;
             box-sizing: border-box;
             -webkit-touch-callout: none;
@@ -58,16 +57,16 @@
             font-size: 32px;
             color: #0A0A0A;
             line-height: 1.125;
-            margin-top: 64px;
+            margin-top: 0;
             margin-bottom: 32px;
         }
         
         h2 {
             font-family: "Plus Jakarta Sans", system-ui;
             font-weight: 400;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 1.25;
-            margin-top: 40px;
+            margin-top: 0;
             margin-bottom: 24px;
         }
         
@@ -87,7 +86,7 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
         
@@ -95,8 +94,9 @@
             display: flex;
             height: 56px;
             width: 100%;
-            padding: 8px 16px;
-            background-color: #FAFAFA;
+            padding: 16px;
+            background-color: white;
+            border-bottom: 1px solid #F5F5F5;
             position: fixed;
             top: 0;
             left: 0;
@@ -114,7 +114,7 @@
 
         .editable-div {
             width: 100%;
-            height: 280px;
+            height: 320px;
             padding: 24px 28px;
             border: 1px solid #D4D4D4;
             background-color: #fff;
@@ -160,12 +160,11 @@
         /* Output text styles */
         #output-text {
             font-size: 1.5em;
-            font-weight: 600;
             border: none;
             font-family: "Plus Jakarta Sans", system-ui;
-            line-height: 1.8;
-            color: #0A0A0A;
-            min-height: 160px;
+            line-height: 1.5;
+            color: #000000;
+            min-height: 120px;
             margin-bottom: 48px;
             white-space: normal;
         }
@@ -293,14 +292,14 @@
     
         /* Preserved styles for syllables */
         #output-text .syllable {
-            background-color: hsl(168 45% 87% / 1) !important;
-            padding: 0px .15em .05em;
-            border-radius: .3em;
+            padding: 0 .1em;
         }
         
         #output-text .word {
             display: inline-block;
-            padding: 0 .15em;
+            border-radius: .3em;
+            padding: 0 .3em .2em .3em;
+            margin: 0 .1em .6em 0;
         }
 
         .controls {
@@ -407,19 +406,21 @@
         }
         
         @media (max-width: 767px) {
-          body {padding: 40px 80px 88px 16px;}
+          body {padding: 88px 80px 88px 16px;}
+          #output-text {font-size: 1.3em;}
         }
         
         @media (max-width: 539px) {
           .controls {display: none;}
-          body {padding: 40px 16px 88px 16px;}
+          body {padding: 64px 16px 48px 16px;}
+          #output-text {font-size: 1.2em;}
         }
         
         @media (max-width: 359px) {
           .btn-group {flex-direction: column;}
           #convert-btn {width: 100%;}
           #clear-btn {width: 100%;}
-          body {padding: 24px 16px 48px 16px;}
+          #output-text {font-size: 1.1em;}
         }
         
     </style>
@@ -428,9 +429,9 @@
     <div id="preloader">
         <div class="spinner"></div>
     </div>
-    
+
     <div class="container">
-        <h1>Dyslexia-Friendly Text Converter</h1>
+        <h1>Readkid: Dyslexia-Friendly Text Converter</h1>
         <div id="input-text" contenteditable="true" class="editable-div" placeholder="Paste your text here..."></div>
         <div class="btn-group">
             <button id="convert-btn">Convert Text</button>
@@ -496,6 +497,7 @@
             // After Hyphenator runs, wait for a short delay and then process the text
             setTimeout(() => {
                 wrapHyphenatedSyllablesWithStyle(outputElement);
+                applySequentialBackgroundColors(); // Apply background colors using classes
             }, 100); // Short delay to allow DOM to update
         });
         
@@ -536,6 +538,63 @@
                 }
             });
         }
+    
+        function applySequentialBackgroundColors() {
+            // Define the colors you want to apply sequentially
+            const colors = [
+                'hsl(168, 90%, 90%)',
+                'hsl(188, 90%, 90%)',
+                'hsl(208, 90%, 90%)',
+                'hsl(228, 90%, 90%)',
+                'hsl(248, 90%, 90%)',
+                'hsl(268, 90%, 90%)',
+                'hsl(288, 90%, 90%)',
+                'hsl(308, 90%, 90%)',
+                'hsl(328, 90%, 90%)',
+                'hsl(348, 90%, 90%)',
+                'hsl(8, 90%, 90%)',
+                'hsl(28, 90%, 90%)',
+                'hsl(28, 90%, 90%)',
+                'hsl(8, 90%, 90%)',
+                'hsl(348, 90%, 90%)',
+                'hsl(328, 90%, 90%)',
+                'hsl(308, 90%, 90%)',
+                'hsl(288, 90%, 90%)',
+                'hsl(268, 90%, 90%)',
+                'hsl(248, 90%, 90%)',
+                'hsl(228, 90%, 90%)',
+                'hsl(208, 90%, 90%)',
+                'hsl(188, 90%, 90%)'
+            ];
+    
+            // Remove old styles if they exist
+            const existingStyles = document.getElementById('dynamic-styles');
+            if (existingStyles) {
+                existingStyles.remove();
+            }
+    
+            // Create a new style element
+            const style = document.createElement('style');
+            style.id = 'dynamic-styles';
+    
+            // Select all elements with the class 'word'
+            const words = document.querySelectorAll('.word');
+            
+            // Iterate over the elements and apply the colors in a round-robin fashion
+            words.forEach((wordElement, index) => {
+                const color = colors[index % colors.length];
+    
+                // Add background color to the class dynamically with !important
+                style.innerHTML += `
+                    #output-text .word:nth-of-type(${index + 1}) {
+                        background-color: ${color} !important;
+                    }
+                `;
+            });
+    
+            // Append the style element to the document head
+            document.head.appendChild(style);
+        }
     </script>
     
     <script>
@@ -550,7 +609,7 @@
                 }, 800); // delay
             };
         });
-        
+
         // Disable right-click
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
@@ -564,7 +623,7 @@
                 (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
                 return false;
             }
-        };
+        }; 
 
         // Controls for font size
         const outputText = document.getElementById('output-text');
@@ -604,7 +663,7 @@
             const inputElement = document.getElementById('input-text');
             inputElement.innerHTML = ''; // Clear the content
             inputElement.focus(); // Optional: Set focus back to the input area
-        });    
+        });  
     </script>
 </body>
 </html>
