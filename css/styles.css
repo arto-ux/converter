@@ -184,13 +184,13 @@ button {
     color: white;
 }
 
-#convert-btn:hover, #clear-btn:hover, #startTestBtn:hover, #restartBtn:hover, #nextBtn:hover, #donate-btn:hover, #prevBtn:hover {
+#convert-btn:hover, #clear-btn:hover, #startTestBtn:hover, #restartBtn:hover, #nextBtn:hover, #donate-btn:hover, #prevBtn:hover, #copyResponseBtn:hover {
     transform: scale(0.98);
     opacity: .8;
 }
 
 
-#clear-btn, #prevBtn {
+#clear-btn, #prevBtn, #copyResponseBtn {
     background-color: var(--grey-100);
     color: var(--grey-900);
 }
