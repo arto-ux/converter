@@ -203,24 +203,6 @@
         const outputElement = document.getElementById('output-text');
         outputElement.innerHTML = inputElement.innerHTML;
 
-        // Show progress bar
-        const progressBar = document.getElementById('progressBar');
-        const progress = document.getElementById('progress');
-        progressBar.style.display = 'block';
-        progress.style.width = '0%';
-
-        // Simulate progress
-        let width = 0;
-        const interval = setInterval(() => {
-            if (width >= 100) {
-            clearInterval(interval);
-            progressBar.style.display = 'none'; // Hide progress bar after completion
-            } else {
-            width++;
-            progress.style.width = width + '%';
-            }
-        }, 10); // Adjust speed of progress
-
         // Run Hyphenator and wrap the content
         Hyphenator.run();
         wrapHyphenatedSyllablesWithStyle(outputElement);
@@ -230,7 +212,6 @@
         document.getElementById('clear-btn').addEventListener('click', function () {
         document.getElementById('input-text').innerHTML = '';
         document.getElementById('output-text').innerHTML = '';
-        document.getElementById('progressBar').style.display = 'none'; // Hide progress bar on clear
         });
 
         document.addEventListener('keydown', function (e) {
