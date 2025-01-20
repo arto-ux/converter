@@ -18,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="fav.svg" type="image/svg+xml">
 </head>
 <body>
     <nav class="navbar">
@@ -75,7 +76,7 @@
     // 1) Define the questions array for your Child Behavior Screening Test
     const questions = [
       {
-        "text": "1. Does your child have a hard time hearing the first sound in a word (like 'b' in 'ball') or putting separate sounds together to form a word?",
+        "text": "Does your child have a hard time hearing the first sound in a word (like 'b' in 'ball') or putting separate sounds together to form a word?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -84,7 +85,7 @@
         ]
       },
       {
-        "text": "2. Does your child reverse letters (like b/d, p/q) or confuse letters that look alike?",
+        "text": "Does your child reverse letters (like b/d, p/q) or confuse letters that look alike?",
         "answers": [
           { "option": "Rarely or never", "score": 0 },
           { "option": "Occasionally", "score": 1 },
@@ -93,7 +94,7 @@
         ]
       },
       {
-        "text": "3. When reading aloud, does your child read slowly or hesitate often to sound out words?",
+        "text": "When reading aloud, does your child read slowly or hesitate often to sound out words?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -102,7 +103,7 @@
         ]
       },
       {
-        "text": "4. Does your child spell words in ways that do not match how they sound (like 'kat' for 'cat' or 'sed' for 'said')?",
+        "text": "Does your child spell words in ways that do not match how they sound (like 'kat' for 'cat' or 'sed' for 'said')?",
         "answers": [
           { "option": "Rarely or never", "score": 0 },
           { "option": "Occasionally", "score": 1 },
@@ -111,7 +112,7 @@
         ]
       },
       {
-        "text": "5. Does your child have trouble telling if two words rhyme or thinking of rhymes?",
+        "text": "Does your child have trouble telling if two words rhyme or thinking of rhymes?",
         "answers": [
           { "option": "Rarely or never", "score": 0 },
           { "option": "Occasionally", "score": 1 },
@@ -120,7 +121,7 @@
         ]
       },
       {
-        "text": "6. Does your child mix up the order of letters or numbers, or struggle to put items in the correct sequence (like days of the week)?",
+        "text": "Does your child mix up the order of letters or numbers, or struggle to put items in the correct sequence (like days of the week)?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -129,7 +130,7 @@
         ]
       },
       {
-        "text": "7. Does your child skip small words (like 'to' or 'of') or skip entire lines when reading?",
+        "text": "Does your child skip small words (like 'to' or 'of') or skip entire lines when reading?",
         "answers": [
           { "option": "Rarely or never", "score": 0 },
           { "option": "Occasionally", "score": 1 },
@@ -138,7 +139,7 @@
         ]
       },
       {
-        "text": "8. Does your child avoid reading or become very tired or upset when asked to read or write?",
+        "text": "Does your child avoid reading or become very tired or upset when asked to read or write?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -147,7 +148,7 @@
         ]
       },
       {
-        "text": "9. When given a few steps to follow (e.g., 'Pick up your shoes, then wash your hands'), does your child forget a step or do them out of order?",
+        "text": "When given a few steps to follow (e.g., 'Pick up your shoes, then wash your hands'), does your child forget a step or do them out of order?",
         "answers": [
           { "option": "Rarely or never", "score": 0 },
           { "option": "Occasionally", "score": 1 },
@@ -156,7 +157,7 @@
         ]
       },
       {
-        "text": "10. Does your child often say words incorrectly, especially longer words (e.g., 'hos-i-pital' for 'hospital')?",
+        "text": "Does your child often say words incorrectly, especially longer words (e.g., 'hos-i-pital' for 'hospital')?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -165,7 +166,7 @@
         ]
       },
       {
-        "text": "11. Does your child pause often or use filler words (e.g., 'um' or 'uh') because they cannot think of the right word?",
+        "text": "Does your child pause often or use filler words (e.g., 'um' or 'uh') because they cannot think of the right word?",
         "answers": [
           { "option": "Rarely or never", "score": 0 },
           { "option": "Occasionally", "score": 1 },
@@ -174,7 +175,7 @@
         ]
       },
       {
-        "text": "12. Can your child read or spell a word correctly one time but get it wrong the next time?",
+        "text": "Can your child read or spell a word correctly one time but get it wrong the next time?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -183,7 +184,7 @@
         ]
       },
       {
-        "text": "13. Does your child get more frustrated with reading or writing tasks than with other activities?",
+        "text": "Does your child get more frustrated with reading or writing tasks than with other activities?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
@@ -192,7 +193,7 @@
         ]
       },
       {
-        "text": "14. Does your child have difficulty copying words from the board or a book?",
+        "text": "Does your child have difficulty copying words from the board or a book?",
         "answers": [
           { "option": "No difficulty", "score": 0 },
           { "option": "Mild difficulty", "score": 1 },
@@ -201,7 +202,7 @@
         ]
       },
       {
-        "text": "15. Does your child often confuse left and right or mix up directions?",
+        "text": "Does your child often confuse left and right or mix up directions?",
         "answers": [
           { "option": "Never", "score": 0 },
           { "option": "Sometimes", "score": 1 },
