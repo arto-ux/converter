@@ -4,656 +4,116 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z63H0TSCMS"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-Z63H0TSCMS');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-Z63H0TSCMS');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dyslexia-Friendly Text Converter | Improve Reading & Accessibility</title>
-    <meta name="description" content="Boost reading comprehension with our dyslexia-friendly text converter. Break text into syllables for easier reading and accessibility. Ideal for children and adults with dyslexia or reading difficulties. Try it now and make reading simpler!">
-    
-    <link rel="icon" href="fav.svg" type="image/svg+xml">
-    <!-- Load Lexend font from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-    <style>
-        html {
-              font-size: 16px;
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        @media (hover: none) {
-            button:hover {
-                /* Remove hover effect on mobile */
-                background-color: initial;
-            }
-        }
-    
-        body {
-            width: 100%;
-            min-height: 100vh;
-            font-size: 16px;
-            line-height: 1.5;
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased; /* Smoothens the font rendering */
-            -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
-            text-rendering: optimizeLegibility; /* Prioritizes legibility */
-            font-optical-sizing: auto;
-            font-style: normal;
-            background-color: #FFFFFF;
-            color: #64748B;
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none
-        }
-
-        h1 {
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-weight: 800;
-            font-size: 32px;
-            color: #0A0A0A;
-            line-height: 1.125;
-            margin-top: 0;
-            margin-bottom: 32px;
-        }
-        
-        h2 {
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 1.25;
-            margin-top: 0;
-            margin-bottom: 24px;
-        }
-        
-        p {
-            margin-top: 0;
-        }
-        
-        a {
-            color: #0051FF;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            width: 100%;
-            padding: 0 24px;
-            max-width: 948px;
-            margin: 0 auto;
-        }
-        
-        .tool {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            min-height: 100vh;
-            padding: 56px 0;
-        }
-        
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 52px;
-            width: 100%;
-            padding: 16px 24px;
-            background-color: rgba(255, 255, 255, 0.6);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 99;            
-        }
-        
-        img, figure {
-            max-width: 100% !important;
-            margin: 0 auto;
-            margin-block-start: 0 !important;
-            margin-block-end: 0 !important;
-            margin-inline-start: 0 !important;
-            margin-inline-end: 0 !important;
-        }
-
-        .editable-div {
-            width: 100%;
-            height: 320px;
-            padding: 24px 28px;
-            border: 1px solid #D4D4D4;
-            background-color: #fff;
-            margin-bottom: 16px;
-            border-radius: 28px;
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-size: 16px;
-            line-height: 1.5;
-            font-weight: 400;
-            overflow-y: auto;
-            outline-style: none;
-            color: #0A0A0A; /* Set default text color */
-        }
-    
-        .editable-div[placeholder]:empty:before {
-            content: attr(placeholder);
-            color: #888;
-        }
-    
-        /* Reset styles for pasted content */
-        .editable-div * {
-            all: revert;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            line-height: inherit !important;
-            color: inherit !important;
-            background: none !important;
-        }
-    
-        /* Preserve list styles */
-        .editable-div ul, .editable-div ol {
-            padding-left: 2em;
-        }
-    
-        .editable-div ul {
-            list-style-type: disc;
-        }
-    
-        .editable-div ol {
-            list-style-type: decimal;
-        }
-    
-        /* Output text styles */
-        #output-text {
-            font-size: 1.5em;
-            border: none;
-            font-family: "Plus Jakarta Sans", system-ui;
-            line-height: 1.5;
-            color: #000000;
-            margin-bottom: 48px;
-            white-space: normal;
-        }
-    
-        #output-text * {
-            all: revert;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            line-height: inherit !important;
-            color: inherit !important;
-            background: none !important;
-        }
-
-        
-        .btn-group {
-             display: flex;
-             gap: 16px;
-             margin-bottom: 56px;
-             text-align: center;
-            }
-
-        #convert-btn {
-            display: block;
-            height: 56px;
-            width: 180px;
-            padding: 15px 28px 17px;
-            background-color: #0A0A0A;
-            color: white;
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 1.2;
-            letter-spacing: .3px;
-            border: none;
-            cursor: pointer;
-            border-radius: 28px;
-            transition: all 1s ease;
-        }
-
-        #convert-btn:hover {
-            background-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #00f5d4);
-            background-size: 300%;
-            animation: magic-gradient 2s ease infinite;
-        }
-        
-        @keyframes magic-gradient {
-            0% {background-position: 0% 0%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
-        }
-        
-        #clear-btn {
-            display: inline-block;
-            height: 56px;
-            width: 110px;
-            padding: 15px 28px 17px;
-            background-color: #f0f0f0;
-            color: #0A0A0A;
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 1.2;
-            letter-spacing: .3px;
-            border: none;
-            cursor: pointer;
-            border-radius: 28px;
-            transition: all 0.3s ease;
-        }
-        
-        #clear-btn:hover {
-            background-color: #D4D4D4;
-        }
-        
-        
-        #donate-btn {
-            display: inline-block;
-            height: 44px;
-            padding: 10px 30px 10px 30px;
-            background-color: transparent;
-            color: #0A0A0A;
-            font-family: "Plus Jakarta Sans", system-ui;
-            font-weight: 800;
-            font-size: 16px;
-            line-height: 1.25;
-            letter-spacing: .3px;
-            border: 2px solid #D4D4D4;
-            cursor: pointer;
-            border-radius: 22px;
-            margin-top: 8px;
-            text-decoration: none;
-            transition: all .4s ease;
-        }
-
-        #donate-btn:hover {
-            background-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #00f5d4);
-            color: white;
-            background-size: 300%;
-            animation: magic-gradient 2s ease infinite;
-            border: 1px solid transparent;
-            text-decoration: none;
-        } 
-
-        .editable-div * {
-            all: revert;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            line-height: inherit !important;
-            color: inherit !important;
-            background: none !important;
-        }
-        
-        .editable-div::-webkit-scrollbar {
-            display: none; /* Hide the scrollbar for WebKit browsers (Chrome, Safari, etc.) */
-        }
-
-        /* Output text styles */
-        #output-text * {
-            all: revert;
-            font-family: inherit !important;
-            font-size: inherit !important;
-            line-height: inherit !important;
-            color: inherit !important;
-            background: none !important;
-        }
-    
-        /* Preserved styles for syllables */
-        #output-text .syllable {
-            padding: 0 .1em;
-        }
-        
-        #output-text .word {
-            display: inline-block;
-            border-radius: .3em;
-            padding: 0 .3em .2em .3em;
-            margin: 0 .1em .6em 0;
-        }
-
-        .controls {
-            position: fixed;
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            bottom: 120px;
-            right: 16px;
-            text-align: center;
-            z-index: 100;
-        }
-
-        .controls button {
-            width: 48px;
-            height: 48px;
-            background-color: #E5E5E5;
-            color: #525252;
-            border: none;
-            border-radius: 50%;
-            padding: 16px;
-            cursor: pointer;
-            transition: all .4s ease;
-        }
-
-        .controls button:hover {
-            background-color: #0A0A0A;
-            color: white;
-        }
-        
-        .controls button:active {
-            background-color: #0A0A0A;
-            color: white;
-        }
-
-        /* Scroll to Top Button */
-        #scroll-top-btn {
-            position: fixed;
-            bottom: 48px;
-            right: 16px;
-            width: 48px;
-            height: 48px;
-            background-color: #0A0A0A;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            padding: 12px;
-            cursor: pointer;
-            transition: all .4s ease;
-            z-index: 100;
-        }
-
-        #scroll-top-btn:hover {
-            padding: 8px 12px 16px;
-        }
-        
-        
-        .footnote {
-            display: flex;
-            width: 80%;
-            max-width: 480px;
-            padding-bottom: 120px;
-            flex-direction: column;
-            font-size: 16px;
-        }
-        .profile-image {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            object-fit: cover;
-        }
-        .content {
-            flex: 1;
-            margin-top: 20px;
-        }
-        
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #FAFAFA;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            visibility: visible;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        #preloader.hide-loader {
-            visibility: hidden;
-            opacity: 0;
-        }
-
-        #preloader .spinner {
-            border: 6px solid #E5E5E5;
-            border-top: 6px solid #0A0A0A;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin .8s ease infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg);}
-            100% { transform: rotate(360deg);}
-        }
-        
-        @media (max-width: 767px) {
-            #output-text {font-size: 1.3em;}
-        }
-        
-        @media (max-width: 539px) {
-            #output-text {font-size: 1.2em;}
-        }
-        
-        @media (max-width: 359px) {
-            h1 {font-size: 28px;}
-            .btn-group {flex-direction: column;}
-            #convert-btn {width: 100%;}
-            #clear-btn {width: 100%;}
-            #output-text {font-size: 1.1em;}
-        }
-        
-    </style>
-</head>
-<body>
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
-    
-    <div class="navbar">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 16" fill="#0a0a0a" width="76px" height="16px">
-            <path d="M0,2.27h5.41c2.43,0,5.64.63,5.64,4.41,0,2.14-.99,3.3-2.34,3.88l2.89,5.08h-4.43l-2.15-4.58h-.95v4.58H0V2.27ZM4.86,8.34c.8,0,1.99-.1,1.99-1.57,0-1.72-1.22-1.78-1.84-1.78h-.93v3.34h.78Z"/>
-            <path d="M12.17,11.06c0-3.57,2.51-5.65,5.85-5.65,2.26,0,4.04.95,4.04,2.88,0,2.37-2.64,3.46-5.55,3.63.34.84,1.03,1.22,2.17,1.22,1.01,0,2.26-.29,3.13-.95l-.11,2.71c-.99.71-2.3,1.11-3.91,1.11-2.89,0-5.62-1.22-5.62-4.94ZM18.71,8.44c0-.65-.46-.76-.82-.76-.91,0-1.52.8-1.6,2.37,1.37-.17,2.41-.67,2.41-1.6Z"/>
-            <path d="M22.99,11.32c0-3.65,2.05-5.92,6.15-5.92,1.84,0,3.68.46,4.65.97v9.26h-3.7l-.19-2.39c-.55,1.51-1.6,2.75-3.38,2.75-1.99,0-3.53-1.53-3.53-4.68ZM29.77,9.87v-2.06c-.23-.06-.53-.12-.8-.12-1.23,0-1.84.9-1.84,3.07,0,1.43.27,2.44,1.06,2.44,1.16,0,1.58-2.21,1.58-3.34Z"/>
-            <path d="M35.17,11.28c0-3.59,2.09-5.88,5.79-5.88.36,0,.68.04.99.1V1.89h4.03v13.75h-3.72l-.19-2.41c-.59,1.64-1.69,2.77-3.32,2.77-2.03,0-3.57-1.53-3.57-4.72ZM40.41,13.21c.99,0,1.54-1.79,1.54-3.28v-2.18c-.25-.04-.51-.06-.8-.06-1.27,0-1.84.99-1.84,3.26,0,.94.21,2.25,1.1,2.25Z"/>
-            <path d="M47.8,1.89h4.03v5.6c.74-1.15,1.94-2.06,3.74-2.06s2.72.97,2.72,2.39-.78,2.44-2.03,3.15l2.53,4.68h-4.18l-1.77-3.76c-.32.02-.66.02-1.01.02v3.74h-4.03V1.89ZM54.6,8.76c0-.46-.3-.65-.7-.65-.91,0-1.65.95-1.95,2.29,2.03-.02,2.66-.94,2.66-1.64Z"/>
-            <path d="M59.6,2.27c0-1.24,1.01-2.27,2.24-2.27s2.24,1.03,2.24,2.27-1.01,2.25-2.24,2.25-2.24-1.01-2.24-2.25ZM59.82,5.77h4.03v9.87h-4.03V5.77Z"/>
-            <path d="M65.19,11.28c0-3.59,2.09-5.88,5.79-5.88.36,0,.68.04.99.1V1.89h4.03v13.75h-3.72l-.19-2.41c-.59,1.64-1.69,2.77-3.32,2.77-2.03,0-3.57-1.53-3.57-4.72ZM70.43,13.21c.99,0,1.54-1.79,1.54-3.28v-2.18c-.25-.04-.51-.06-.8-.06-1.27,0-1.84.99-1.84,3.26,0,.94.21,2.25,1.1,2.25Z"/>
-      </svg>
-    </div>
-
-    <section class="tool">
-        <div class="container">
-            <h1>Dyslexia-Friendly Text Converter</h1>
-            <div id="input-text" contenteditable="true" class="editable-div" placeholder="Paste your text here..."></div>
-            <div class="btn-group">
-                <button id="convert-btn">Convert Text</button>
-                <button id="clear-btn">Clear</button>
-            </div>
-            <div id="output-text" class="output-text hyphenate"></div>
-        </div>
-    </section>
-    
-    <div class="container">
-        <div class="footnote">
-            <img src="arto.jpg" alt="Arto Baghdasaryan" class="profile-image">
-            <div class="content">
-                <p>Hi there, I'm Arto! 👋😊</p>
-                <p>I created this tool for kids who struggle with reading and are often unfairly judged as lazy or not smart. If you know how to make this tool more useful, reach out to me on 
-                    <a href="https://www.linkedin.com/in/artobaghdasaryan" target="_blank">LinkedIn.</a>
-                </p>
-                <p>And if you'd like to support me in keeping this tool available, donations are welcome and appreciated.</p>
-                <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">Donate</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="controls">
-        <button id="increase-font">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="0" y="7" width="16" height="2" rx="1" ry="1"/>
-                <rect x="0" y="7" width="16" height="2" rx="1" ry="1" transform="translate(0 16) rotate(-90)"/>
-            </svg>                
-        </button>
-        <button id="decrease-font">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="0" y="7" width="16" height="2" rx="1" ry="1"/>
-            </svg>                  
-        </button>
-    </div>
-
-    <button id="scroll-top-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="24px"  height="24px" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
-        </svg>
-    </button>
-    
+    <title>Readkid | Free Dyslexia Text Converter</title>
+    <meta name="description" content="Convert any text into a dyslexia-friendly format with just one click. Improve reading accessibility and make content more readable!">
+    <link rel="stylesheet" href="styles.css"/>
     <script src="Hyphenator.js"></script>
     <script src="en-us.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="fav.svg" type="image/svg+xml">
+</head>
+<body>
+    <nav class="navbar">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="#18181B"/>
+            <path d="M10 8H17C19.5 8 22 9.5 22 13" stroke="#FF3C00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 24V8M22 13C22 16.5 19.5 18 17 18H10M22 24L18.5 17.8108" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>        
+        <div class="menu">
+            <a href="converter.html" class="active">Converter</a>
+            <a href="test.html">Screening Test</a>
+            <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">Donate</a>
+        </div>
+        <div class="burger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="converter.html" class="active">Converter</a>
+        <a href="test.html">Screening Test</a>
+        <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">Donate</a>
+    </div>
+    <!-- tool -->
+    <div class="container">
+        <h1>Dyslexia-Friendly Text Converter</h1>
+        <div id="input-text" class="editable-div" contenteditable="true" placeholder="Paste your text here..." role="textbox" aria-label="Input text area" autofocus></div>
+        <div class="btn-group">
+            <button 
+                id="convert-btn" 
+                aria-label="Convert text"
+            >Convert</button>
+            <button 
+                id="clear-btn" 
+                aria-label="Clear text"
+            >Clear</button>
+        </div>
+        <div id="output-text" role="region" aria-label="Converted text output"></div>
+    </div>
 
     <script>
-        document.getElementById('convert-btn').addEventListener('click', function () {
-            const inputElement = document.getElementById('input-text');
-            const outputElement = document.getElementById('output-text');
-            
-            // Clone the input content
-            const cleanedContent = inputElement.cloneNode(true);
-            
-            // Remove all style attributes
-            cleanedContent.querySelectorAll('*').forEach(el => {
-                el.removeAttribute('style');
-                el.removeAttribute('class');
-            });
-            
-            // Set the cleaned content to the output element
-            outputElement.innerHTML = cleanedContent.innerHTML;
-        
-            // Run Hyphenator to apply hyphenation
-            Hyphenator.run();
-        
-            // After Hyphenator runs, wait for a short delay and then process the text
-            setTimeout(() => {
-                wrapHyphenatedSyllablesWithStyle(outputElement);
-                applySequentialBackgroundColors(); // Apply background colors using classes
-            }, 100); // Short delay to allow DOM to update
-        });
-        
-        function wrapHyphenatedSyllablesWithStyle(element) {
-            // Process each child node of the element
-            Array.from(element.childNodes).forEach(node => {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    // Process text nodes
-                    let fragment = document.createDocumentFragment();
-                    let words = node.textContent.match(/[\w\u00AD]+[^\w\u00AD\s]*\s*/g) || [];
-        
-                    words.forEach(wordWithSpace => {
-                        let wordMatch = wordWithSpace.match(/([\w\u00AD]+)([^\w\u00AD\s]*)(\s*)/);
-                        let word = wordMatch[1];
-                        let punctuation = wordMatch[2];
-                        let space = wordMatch[3];
-        
-                        let syllables = word.split('\u00AD');
-                        let wordSpan = document.createElement('span');
-                        wordSpan.className = 'word';
-        
-                        syllables.forEach(syllable => {
-                            let syllableSpan = document.createElement('span');
-                            syllableSpan.className = 'syllable';
-                            syllableSpan.textContent = syllable;
-                            wordSpan.appendChild(syllableSpan);
-                        });
-        
-                        wordSpan.innerHTML += punctuation;
-                        fragment.appendChild(wordSpan);
-                        if (space) fragment.appendChild(document.createTextNode(space));
+        document.getElementById('input-text').addEventListener('paste', function (e) {
+            e.preventDefault();
+
+            // Get the pasted content as HTML or plain text
+            const pastedHTML = (e.clipboardData || window.clipboardData).getData('text/html') || 
+                            (e.clipboardData || window.clipboardData).getData('text');
+
+            // Create a temporary element to parse the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = pastedHTML;
+
+            // Function to sanitize content
+            const sanitizeContent = (element) => {
+                // List of tags to remove entirely
+                const unwantedTags = ['img', 'iframe', 'script', 'embed', 'object', 'style', 'link', 'canvas', 'figure', 'select', 'input', 'svg'];
+
+                // Remove unwanted tags completely
+                unwantedTags.forEach(tag => {
+                    const elements = element.querySelectorAll(tag);
+                    elements.forEach(el => el.remove());
+                });
+
+                // Replace <a> and <button> with their text content
+                const replaceableTags = ['a', 'button'];
+                replaceableTags.forEach(tag => {
+                    const elements = element.querySelectorAll(tag);
+                    elements.forEach(el => {
+                        const textNode = document.createTextNode(el.textContent);
+                        el.replaceWith(textNode);
                     });
-        
-                    node.parentNode.replaceChild(fragment, node);
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    // Recursively process child elements
-                    wrapHyphenatedSyllablesWithStyle(node);
+                });
+
+                // Remove inline styles
+                element.removeAttribute('style');
+
+                // Recursively sanitize child nodes
+                for (const child of element.children) {
+                    sanitizeContent(child);
                 }
-            });
-        }
-    
-        function applySequentialBackgroundColors() {
-            // Define the colors you want to apply sequentially
-            const colors = [
-                'hsl(168, 90%, 90%)',                
-                'hsl(188, 90%, 90%)',             
-                'hsl(208, 90%, 90%)',             
-                'hsl(228, 90%, 90%)',             
-                'hsl(248, 90%, 90%)',             
-                'hsl(268, 90%, 90%)',             
-                'hsl(288, 90%, 90%)',               
-                'hsl(308, 90%, 90%)',           
-                'hsl(328, 90%, 90%)',             
-                'hsl(348, 90%, 90%)',          
-                'hsl(8, 90%, 90%)',              
-                'hsl(28, 90%, 90%)',             
-                'hsl(28, 90%, 90%)',             
-                'hsl(8, 90%, 90%)',             
-                'hsl(348, 90%, 90%)',           
-                'hsl(328, 90%, 90%)',            
-                'hsl(308, 90%, 90%)',              
-                'hsl(288, 90%, 90%)',          
-                'hsl(268, 90%, 90%)',        
-                'hsl(248, 90%, 90%)',   
-                'hsl(228, 90%, 90%)',          
-                'hsl(208, 90%, 90%)',     
-                'hsl(188, 90%, 90%)'
-            ];
-    
-            // Remove old styles if they exist
-            const existingStyles = document.getElementById('dynamic-styles');
-            if (existingStyles) {
-                existingStyles.remove();
-            }
-    
-            // Create a new style element
-            const style = document.createElement('style');
-            style.id = 'dynamic-styles';
-    
-            // Select all elements with the class 'word'
-            const words = document.querySelectorAll('.word');
-            
-            // Iterate over the elements and apply the colors in a round-robin fashion
-            words.forEach((wordElement, index) => {
-                const color = colors[index % colors.length];
-    
-                // Add background color to the class dynamically with !important
-                style.innerHTML += `
-                    #output-text .word:nth-of-type(${index + 1}) {
-                        background-color: ${color} !important;
-                    }
-                `;
-            });
-    
-            // Append the style element to the document head
-            document.head.appendChild(style);
-        }
-    </script>
-    
-    <script>
-        // Display preloader on page load
-        document.addEventListener("DOMContentLoaded", function () {
-            const preloader = document.getElementById('preloader');
-    
-            window.onload = function () {
-                // Ensure the loader is visible for at least 1 second
-                setTimeout(function () {
-                    preloader.classList.add('hide-loader');
-                }, 800); // delay
             };
+
+            // Sanitize the content
+            sanitizeContent(tempDiv);
+
+            // Insert sanitized content into the input text area
+            document.execCommand('insertHTML', false, tempDiv.innerHTML);
         });
-        
+
+    </script>
+
+    <script>
         // Disable right-click
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
@@ -667,76 +127,120 @@
                 (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
                 return false;
             }
-        }; 
-
-        // Controls for font size
-        const outputText = document.getElementById('output-text');
-        let fontSize = 1.5;
-
-        document.getElementById('increase-font').addEventListener('click', function() {
-            fontSize += 0.2;
-            outputText.style.fontSize = fontSize + 'em';
-        });
-
-        document.getElementById('decrease-font').addEventListener('click', function() {
-            fontSize = Math.max(1, fontSize - 0.2);
-            outputText.style.fontSize = fontSize + 'em';
-        });
-
-        // Scroll to top button
-        const scrollTopBtn = document.getElementById('scroll-top-btn');
-        
-        window.onscroll = function() {
-            // Show the button if scrolled down more than 100px
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollTopBtn.style.display = 'block';
-            } else {
-                scrollTopBtn.style.display = 'none';
-            }
-        };
-        
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Initially hide the scroll to top button
-        scrollTopBtn.style.display = 'none';
-        
-        // Add this new function for clearing the input
-        document.getElementById('clear-btn').addEventListener('click', function() {
-            const inputElement = document.getElementById('input-text');
-            inputElement.innerHTML = ''; // Clear the content
-            inputElement.focus(); // Optional: Set focus back to the input area
-        });       
+        };   
     </script>
-    
+
     <script>
-        // Function to toggle the visibility of .controls based on #output-text content
-        function toggleControlsVisibility() {
-            const outputElement = document.getElementById('output-text');
-            
-            // Check if the #output-text has content
-            if (outputElement.innerHTML.trim() !== '') {
-                // Show .controls if there's content
-                document.querySelector('.controls').style.display = 'flex';
-            } else {
-                // Hide .controls if it's empty
-                document.querySelector('.controls').style.display = 'none';
-            }
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
         }
-    
-        // Add an event listener to the Convert button
-        document.getElementById('convert-btn').addEventListener('click', function () {
-            setTimeout(() => {
-                toggleControlsVisibility(); // Check visibility after conversion and update the UI
-            }, 100); // Short delay to allow DOM to update
-        });
-    
-        // Optionally, you can check initially on page load if #output-text has content
-        document.addEventListener("DOMContentLoaded", function () {
-            toggleControlsVisibility(); // Ensure controls are hidden initially if no content
+
+        // Highlight the active link based on the URL hash
+        const links = document.querySelectorAll('.menu a, .mobile-menu a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
         });
     </script>
-    
+
+    <script>
+        // Configure Hyphenator.js
+        Hyphenator.config({
+        displaytogglebox: false,
+        minwordlength: 4,
+        hyphenchar: '-'
+        });
+
+        // Add exceptions for specific words
+        Hyphenator.addExceptions('en', 'title succeed proceed exceed little subtle castle bottle gentle');
+
+        function wrapHyphenatedSyllablesWithStyle(element) {
+        Array.from(element.childNodes).forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+            const fragment = document.createDocumentFragment();
+            const words = node.textContent.match(/\b[\w']+\b/g) || [];
+
+            words.forEach(word => {
+                const syllables = Hyphenator.hyphenate(word, 'en').split('-');
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+
+                syllables.forEach(syllable => {
+                const syllableSpan = document.createElement('span');
+                syllableSpan.className = 'syllable';
+                syllableSpan.textContent = syllable;
+                wordSpan.appendChild(syllableSpan);
+                });
+
+                fragment.appendChild(wordSpan);
+            });
+
+            node.parentNode.replaceChild(fragment, node);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+            wrapHyphenatedSyllablesWithStyle(node);
+            }
+        });
+        }
+
+        function applySequentialBackgroundColors() {
+        const colors = [
+            'hsl(168, 90%, 90%)', 'hsl(188, 90%, 90%)', 'hsl(208, 90%, 90%)',
+            'hsl(228, 90%, 90%)', 'hsl(248, 90%, 90%)', 'hsl(268, 90%, 90%)',
+            'hsl(288, 90%, 90%)', 'hsl(308, 90%, 90%)', 'hsl(328, 90%, 90%)'
+        ];
+
+        const words = document.querySelectorAll('.word');
+        words.forEach((word, index) => {
+            word.style.backgroundColor = colors[index % colors.length];
+        });
+        }
+
+        document.getElementById('convert-btn').addEventListener('click', function () {
+        const inputElement = document.getElementById('input-text');
+        const outputElement = document.getElementById('output-text');
+        outputElement.innerHTML = inputElement.innerHTML;
+
+        // Show progress bar
+        const progressBar = document.getElementById('progressBar');
+        const progress = document.getElementById('progress');
+        progressBar.style.display = 'block';
+        progress.style.width = '0%';
+
+        // Simulate progress
+        let width = 0;
+        const interval = setInterval(() => {
+            if (width >= 100) {
+            clearInterval(interval);
+            progressBar.style.display = 'none'; // Hide progress bar after completion
+            } else {
+            width++;
+            progress.style.width = width + '%';
+            }
+        }, 10); // Adjust speed of progress
+
+        // Run Hyphenator and wrap the content
+        Hyphenator.run();
+        wrapHyphenatedSyllablesWithStyle(outputElement);
+        applySequentialBackgroundColors();
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', function () {
+        document.getElementById('input-text').innerHTML = '';
+        document.getElementById('output-text').innerHTML = '';
+        document.getElementById('progressBar').style.display = 'none'; // Hide progress bar on clear
+        });
+
+        document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            document.getElementById('convert-btn').click();
+        }
+        if (e.ctrlKey && e.key === 'Delete') {
+            document.getElementById('clear-btn').click();
+        }
+        });
+    </script>
 </body>
 </html>
