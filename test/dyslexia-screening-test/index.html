@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z63H0TSCMS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-Z63H0TSCMS');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Readkid | Free Dyslexia Screening Test for Parents</title>
+    <meta name="description" content="Take a free dyslexia screening test designed for parents. This simple test helps you identify if your child shows early signs of dyslexia. Start now to support your child’s learning journey!">
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="/images/fav.svg" type="image/svg+xml">
+</head>
+<body>
+    <nav class="navbar">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="#18181B"/>
+            <path d="M10 8H17C19.5 8 22 9.5 22 13" stroke="#FF3C00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 24V8M22 13C22 16.5 19.5 18 17 18H10M22 24L18.5 17.8108" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>           
+        <div class="menu">
+            <a href="/">Home</a>
+            <a href="/test/" class="active">Screening Test</a>
+            <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">Donate</a>
+        </div>
+        <div class="burger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/">Home</a>
+        <a href="/test/" class="active">Screening Test</a>
+        <a id="donate-btn" href="https://buymeacoffee.com/arto.b" target="_blank">Donate</a>
+    </div>
+    <!-- quiz -->
+    <div class="container">
+        <div class="test-wrapper">
+            <div class="test-intro" id="intro-section">
+                <h1>Dyslexia Screening Test</h1>
+                <p>This simple test helps check if your child may show signs of dyslexia. It is not a diagnosis and does not replace a professional evaluation.</p>
+                <button id="startTestBtn">Start Test</button>
+            </div>
+            <div id="quiz-container" class="question-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div class="question" id="questionText"></div>
+                <div class="answers" id="answersList"></div>
+                <div class="navigation-buttons">
+                    <button id="prevBtn">Back</button>
+                    <button id="nextBtn">Next</button>
+                </div>
+            </div>
+            <div id="results-container" class="results">
+                <h2>Results</h2>
+                <p id="resultText"></p>
+                <div class="final-buttons">
+                    <button id="restartBtn">Restart</button>
+                    <button id="copyResponseBtn">Copy Results</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // 1) Define the questions array for your Child Behavior Screening Test
+    const questions = [
+      {
+        "text": "Does your child have a hard time hearing the first sound in a word (like 'b' in 'ball') or putting separate sounds together to form a word?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child reverse letters (like b/d, p/q) or confuse letters that look alike?",
+        "answers": [
+          { "option": "Rarely or never", "score": 0 },
+          { "option": "Occasionally", "score": 1 },
+          { "option": "Frequently", "score": 2 },
+          { "option": "Almost constantly", "score": 3 }
+        ]
+      },
+      {
+        "text": "When reading aloud, does your child read slowly or hesitate often to sound out words?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child spell words in ways that do not match how they sound (like 'kat' for 'cat' or 'sed' for 'said')?",
+        "answers": [
+          { "option": "Rarely or never", "score": 0 },
+          { "option": "Occasionally", "score": 1 },
+          { "option": "Frequently", "score": 2 },
+          { "option": "Almost constantly", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child have trouble telling if two words rhyme or thinking of rhymes?",
+        "answers": [
+          { "option": "Rarely or never", "score": 0 },
+          { "option": "Occasionally", "score": 1 },
+          { "option": "Frequently", "score": 2 },
+          { "option": "Almost constantly", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child mix up the order of letters or numbers, or struggle to put items in the correct sequence (like days of the week)?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child skip small words (like 'to' or 'of') or skip entire lines when reading?",
+        "answers": [
+          { "option": "Rarely or never", "score": 0 },
+          { "option": "Occasionally", "score": 1 },
+          { "option": "Frequently", "score": 2 },
+          { "option": "Almost constantly", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child avoid reading or become very tired or upset when asked to read or write?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "When given a few steps to follow (e.g., 'Pick up your shoes, then wash your hands'), does your child forget a step or do them out of order?",
+        "answers": [
+          { "option": "Rarely or never", "score": 0 },
+          { "option": "Occasionally", "score": 1 },
+          { "option": "Frequently", "score": 2 },
+          { "option": "Almost constantly", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child often say words incorrectly, especially longer words (e.g., 'hos-i-pital' for 'hospital')?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child pause often or use filler words (e.g., 'um' or 'uh') because they cannot think of the right word?",
+        "answers": [
+          { "option": "Rarely or never", "score": 0 },
+          { "option": "Occasionally", "score": 1 },
+          { "option": "Frequently", "score": 2 },
+          { "option": "Almost constantly", "score": 3 }
+        ]
+      },
+      {
+        "text": "Can your child read or spell a word correctly one time but get it wrong the next time?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child get more frustrated with reading or writing tasks than with other activities?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child have difficulty copying words from the board or a book?",
+        "answers": [
+          { "option": "No difficulty", "score": 0 },
+          { "option": "Mild difficulty", "score": 1 },
+          { "option": "Moderate difficulty", "score": 2 },
+          { "option": "Significant difficulty", "score": 3 }
+        ]
+      },
+      {
+        "text": "Does your child often confuse left and right or mix up directions?",
+        "answers": [
+          { "option": "Never", "score": 0 },
+          { "option": "Sometimes", "score": 1 },
+          { "option": "Often", "score": 2 },
+          { "option": "All the time", "score": 3 }
+        ]
+      }
+    ];
+  
+    // 2) Global variables/tracking
+    let currentQuestionIndex = 0;
+    let userAnswers = Array(questions.length).fill(null);
+  
+    // 3) DOM references
+    const introSection = document.getElementById("intro-section");
+    const quizContainer = document.getElementById("quiz-container");
+    const questionText = document.getElementById("questionText");
+    const answersList = document.getElementById("answersList");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resultsContainer = document.getElementById("results-container");
+    const resultText = document.getElementById("resultText");
+    const restartBtn = document.getElementById("restartBtn");
+    const copyResponseBtn = document.getElementById("copyResponseBtn");
+    const progressBar = document.getElementById("progress");
+  
+    // 4) Show question (includes the fix for re-enabling Next if an answer is already selected)
+    function showQuestion(index) {
+      answersList.innerHTML = "";
+      const question = questions[index];
+      questionText.textContent = question.text;
+  
+      // Render possible answers
+      question.answers.forEach((answer, i) => {
+        const label = document.createElement("label");
+        label.classList.add("answer-option");
+  
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "answer";
+        input.value = i;
+  
+        const span = document.createElement("span");
+        span.textContent = answer.option;
+  
+        // If this was the user's previously chosen answer
+        if (userAnswers[index] === i) {
+          input.checked = true;
+        }
+  
+        label.appendChild(input);
+        label.appendChild(span);
+        answersList.appendChild(label);
+      });
+  
+      // === Enable or disable Next based on whether userAnswers[index] is null ===
+      if (userAnswers[index] !== null) {
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+      } else {
+        nextBtn.disabled = true;
+        nextBtn.style.opacity = "0.5";
+      }
+  
+      // Update progress bar
+      const progressPercentage = ((index + 1) / questions.length) * 100;
+      progressBar.style.width = progressPercentage + "%";
+  
+      // Back button visible only if not on first Q
+      prevBtn.style.display = index === 0 ? "none" : "inline-block";
+  
+      // If last question => button text "Complete Test"
+      nextBtn.textContent = index === (questions.length - 1) ? "Complete Test" : "Next";
+    }
+  
+    // 5) Save the selected radio value
+    function storeAnswer() {
+      const radios = document.getElementsByName("answer");
+      let selected = false;
+      radios.forEach((radio) => {
+        if (radio.checked) {
+          userAnswers[currentQuestionIndex] = parseInt(radio.value, 10);
+          selected = true;
+        }
+      });
+      return selected;
+    }
+  
+    // 6) Calculate total score
+    function calculateScore() {
+      let totalScore = 0;
+      userAnswers.forEach((ans, qIndex) => {
+        if (ans !== null) {
+          totalScore += questions[qIndex].answers[ans].score;
+        }
+      });
+      return totalScore;
+    }
+  
+    // 7) Get final result text from total score
+    function getResultText(score) {
+      if (score <= 14) {
+        return "Your child shows few or no signs of the difficulties associated with dyslexia based on these questions. Keep an eye on their reading and writing progress, but there may be no immediate need for concern. Continue to support your child’s literacy development at home. If concerns arise in the future, consider consulting with an educator or reading specialist.";
+      } else if (score <= 29) {
+        return "Your child shows some signs that could be related to dyslexia or other reading challenges. These signs may not be severe, but it’s important to watch your child’s progress closely. Discuss any concerns with your child’s teacher. They can provide insight into whether these issues are affecting classroom performance. Early interventions, such as extra reading practice or specialized instruction, may be helpful.";
+      } else if (score <= 44) {
+        return "Your child shows moderate signs that might suggest dyslexia or a related reading difficulty. These challenges may impact their learning if not addressed. Consider requesting a more formal assessment from a reading specialist, educational psychologist, or pediatrician. Early identification and targeted support can improve your child’s reading and writing skills significantly.";
+      } else {
+        return "Your child shows many signs frequently linked with dyslexia or similar learning differences. These challenges are likely affecting their literacy and possibly other subjects. Seek a comprehensive evaluation from a qualified professional (e.g., educational psychologist, dyslexia specialist). Getting a formal diagnosis or clear understanding of your child’s needs can lead to effective, tailored interventions and accommodations.";
+      }
+    }
+  
+    // 8) Button & UI event listeners
+    document.getElementById("startTestBtn").addEventListener("click", function() {
+      introSection.style.display = "none";
+      quizContainer.style.display = "block";
+      showQuestion(currentQuestionIndex);
+    });
+  
+    prevBtn.addEventListener("click", function() {
+      storeAnswer(); // Store selection before going back
+      currentQuestionIndex--;
+      showQuestion(currentQuestionIndex);
+    });
+  
+    // Next button disabled initially
+    nextBtn.disabled = true;
+    nextBtn.style.opacity = "0.5";
+  
+    nextBtn.addEventListener("click", function () {
+      // Ensure an answer is selected
+      if (!storeAnswer()) {
+        return; 
+      }
+      // If on last question => show results
+      if (currentQuestionIndex === questions.length - 1) {
+        const finalScore = calculateScore();
+        resultText.textContent = getResultText(finalScore);
+        quizContainer.style.display = "none";
+        resultsContainer.style.display = "block";
+      } else {
+        // Not last question => next question
+        currentQuestionIndex++;
+        showQuestion(currentQuestionIndex);
+      }
+    });
+  
+    // Enable Next as soon as an answer is selected
+    answersList.addEventListener("change", function () {
+      const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+      if (selectedAnswer) {
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+      }
+    });
+  
+    // Restart button
+    restartBtn.addEventListener("click", function() {
+      resultsContainer.style.display = "none";
+      introSection.style.display = "flex";
+      currentQuestionIndex = 0;
+      userAnswers = Array(questions.length).fill(null);
+      progressBar.style.width = "0%";
+    });
+  
+    // Copy results button
+    copyResponseBtn.addEventListener("click", function () {
+      const textToCopy = resultText.textContent;
+      navigator.clipboard.writeText(textToCopy).then(
+        function () {
+          showSnackbar("Copied to clipboard.");
+        },
+        function () {
+          showSnackbar("Failed to copy. Try again.");
+        }
+      );
+    });
+  
+    // Snackbar function
+    function showSnackbar(message) {
+      if (!document.getElementById("snackbar")) {
+        const snackbar = document.createElement("div");
+        snackbar.id = "snackbar";
+        document.body.appendChild(snackbar);
+      }
+      const snackbar = document.getElementById("snackbar");
+      snackbar.textContent = message;
+      snackbar.className = "show";
+      setTimeout(() => {
+        snackbar.className = snackbar.className.replace("show", "");
+      }, 2000);
+    }
+  </script>
+
+  <script>
+    // Disable right-click
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  
+    document.onkeydown = function(e) {
+      if (
+        e.keyCode == 123 || // F12
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+        (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl+Shift+C
+        (e.ctrlKey && e.keyCode == 85) // Ctrl+U
+      ) {
+        return false;
+      }
+    };
+  </script>
+  
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
+  
+    // Highlight the active link
+    const links = document.querySelectorAll('.menu a, .mobile-menu a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+  
+  
+</body>
+</html>
