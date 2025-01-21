@@ -373,10 +373,10 @@
       const textToCopy = resultText.textContent;
       navigator.clipboard.writeText(textToCopy).then(
         function () {
-          showSnackbar("Copied to clipboard.");
+          showSnackbar("Copied!");
         },
         function () {
-          showSnackbar("Failed to copy. Try again.");
+          showSnackbar("Failed. Try again.");
         }
       );
     });
