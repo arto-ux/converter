@@ -387,7 +387,6 @@ button {
 
 #snackbar {
     visibility: hidden;
-    min-width: 240px;
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
     text-align: center;
