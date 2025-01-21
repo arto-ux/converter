@@ -390,7 +390,7 @@ button {
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
     text-align: center;
-    border-radius: .25em;
+    border-radius: .5em;
     padding: .75em 1.25em;
     position: fixed;
     top: 0;
