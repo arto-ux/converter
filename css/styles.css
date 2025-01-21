@@ -197,7 +197,7 @@ button {
 
 .test-wrapper {
     max-width: 520px;
-    margin: 5em auto;
+    margin: 4em auto;
 }
 
 .test-intro {
@@ -376,15 +376,13 @@ button {
 .progress-bar {
     width: 100%;
     background-color: var(--grey-100);
-    border-radius: 2px;
     height: 4px;
-    margin-bottom: 24px;
+    margin-bottom: 1em;
 }
 .progress {
     height: 100%;
     width: 0;
     background-color: var(--orange);
-    border-radius: 2px;
 }
 
 #snackbar {
@@ -411,5 +409,6 @@ button {
     visibility: visible;
     transform: translate(-50%, 8px);
     opacity: 1;
+    transition: opacity 0.4s ease-out, visibility 0.4s ease-out, transform 0.4s ease-out;
 }
   
